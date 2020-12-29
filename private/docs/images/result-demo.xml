@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///D:/Program Files (x86)/Nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.80 scan initiated Tue Dec 29 15:27:32 2020 as: &quot;D:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -sS -sV -p- -v -oX a.xml 10.25.9.181 -->
+<nmaprun scanner="nmap" args="&quot;D:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -sS -sV -p- -v -oX a.xml 10.25.9.181" start="1609226852" startstr="Tue Dec 29 15:27:32 2020" version="7.80" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
+<verbose level="1"/>
+<debugging level="0"/>
+<taskbegin task="Ping Scan" time="1609226853"/>
+<taskend task="Ping Scan" time="1609226853" extrainfo="1 total hosts"/>
+<taskbegin task="Parallel DNS resolution of 1 host." time="1609226853"/>
+<taskend task="Parallel DNS resolution of 1 host." time="1609226853"/>
+<taskbegin task="SYN Stealth Scan" time="1609226853"/>
+<taskend task="SYN Stealth Scan" time="1609226857" extrainfo="65535 total ports"/>
+<taskbegin task="Service scan" time="1609226858"/>
+<taskend task="Service scan" time="1609226874" extrainfo="9 services on 1 host"/>
+<taskbegin task="NSE" time="1609226874"/>
+<taskend task="NSE" time="1609226874"/>
+<taskbegin task="NSE" time="1609226874"/>
+<taskend task="NSE" time="1609226875"/>
+<host starttime="1609226853" endtime="1609226875"><status state="up" reason="echo-reply" reason_ttl="62"/>
+<address addr="10.25.9.181" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><extraports state="closed" count="65526">
+<extrareasons reason="resets" count="65526"/>
+</extraports>
+<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="ssh" product="OpenSSH" version="6.5" extrainfo="protocol 2.0" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:6.5</cpe></service></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="http" product="Werkzeug httpd" version="0.9.4" extrainfo="Python 2.7.3" method="probed" conf="10"><cpe>cpe:/a:python:python:2.7.3</cpe></service></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="netbios-ssn" product="Samba smbd" version="3.X - 4.X" extrainfo="workgroup: MYGROUP" method="probed" conf="10"><cpe>cpe:/a:samba:samba</cpe></service></port>
+<port protocol="tcp" portid="389"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="ldap" extrainfo="Anonymous bind OK" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="http" product="nginx" version="1.6.2" tunnel="ssl" method="probed" conf="10"><cpe>cpe:/a:igor_sysoev:nginx:1.6.2</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="netbios-ssn" product="Samba smbd" version="3.X - 4.X" extrainfo="workgroup: MYGROUP" method="probed" conf="10"><cpe>cpe:/a:samba:samba</cpe></service></port>
+<port protocol="tcp" portid="873"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="rsync" extrainfo="protocol version 31" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="4231"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="http" product="Werkzeug httpd" version="0.9.4" extrainfo="Python 2.7.3" method="probed" conf="10"><cpe>cpe:/a:python:python:2.7.3</cpe></service></port>
+<port protocol="tcp" portid="6379"><state state="open" reason="syn-ack" reason_ttl="62"/><service name="redis" product="Redis key-value store" method="probed" conf="10"/></port>
+</ports>
+<times srtt="1010" rttvar="22" to="100000"/>
+</host>
+<runstats><finished time="1609226875" timestr="Tue Dec 29 15:27:55 2020" elapsed="23.15" summary="Nmap done at Tue Dec 29 15:27:55 2020; 1 IP address (1 host up) scanned in 23.15 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>
