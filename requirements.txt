@@ -1,0 +1,43 @@
+# coding:utf-8
+--trusted-host mirrors.aliyun.com
+--index-url http://mirrors.aliyun.com/pypi/simple/
+# --index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+Django==3.1
+django-cors-headers==2.1.0
+PyMySQL==0.9.2
+requests
+requests_toolbelt
+requests[socks]
+xmltodict==0.12.0
+python-libnmap==0.7.0
+Ipy
+address==0.1.1
+shortuuid
+dateutils
+pyfiglet
+PyYAML==5.3.1
+
+djangorestframework==3.12.2
+djangorestframework-bulk==0.2.1
+
+# Django-redis
+redis==3.5.3
+django-redis==4.9.0
+django-redis-cache==2.1.1
+django-redis-sessions==0.6.1
+
+# Django-celery
+celery==4.4.2
+flower==0.9.3
+futures==3.1.1
+eventlet==0.24.1
+greenlet==0.4.14
+django-celery-beat==2.0
+
+# wsgi
+gunicorn==19.9.0
+
+
+
+
