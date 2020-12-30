@@ -18,7 +18,7 @@ def portscan(scan_ip, opts=None, rate=2000):
         rate=str(rate),
         opts=opts
     )
-    return masscan_result_path
+    return masscan_shell, masscan_result_path
 
 
 

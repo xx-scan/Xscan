@@ -21,6 +21,7 @@ AssetDetection \
     --alive-type 0 \
     --timeout 30 \
     --output result.txt 
+
 ```
 
 ### 输入参数
@@ -47,6 +48,7 @@ output | 输出位置 | 存储报告的路径
  ventor |所属厂商 | 华为、vmware/qemu虚拟机
  discover_time|发现时间 | 2020-12-31 11:12:13
  alive | 存活  | 0/1 枚举，存活是1 
+ task_id | 任务ID | `<uuid>`
  
  ## 2. 资产端口快速发现 【脚本】
 ### 命令行接口
@@ -76,7 +78,9 @@ exclude-targets | 忽略目标的列表 | 输入类型同扫描目标
 exclude-targets-type | 忽略目标的列表类型 | 输入类型同扫描目标
 timeout | 超时设置 | 超过timeout数值的连接就算不存在
 output | 输出路径 | /data/scan_result/<uuid>.xml
-
+ task_id | 任务ID | `<uuid>`
+ report_id | 
+ 
 ### 输出 xml 格式
 - 涵盖了 os、mac、port、protocol, service, service-version、discover_time 信息
 
@@ -116,6 +120,7 @@ AssetDetection \
     --output /tmp/xscan/service-con.xml  
 
 ```
+
 ### 输入参数
 
  输出参数| 描述 | 示例
@@ -133,7 +138,6 @@ output | 输出路径 | /data/scan_result/<uuid>.xml
 
 ### 输出 xml 格式
 - 涵盖了 os、mac、port、service, service-version、discover_time 信息
-
 
 ## 后记
  - 报告2

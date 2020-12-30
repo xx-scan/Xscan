@@ -1,15 +1,13 @@
+# coding:utf-8
+
 import os
-import sys
 
-
-from .conf import load_user_config
+from lib.conf import load_user_config
 from . import const
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_DIR = os.path.dirname(BASE_DIR)
-# sys.path.append(PROJECT_DIR)
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = PROJECT_DIR
 
-CONFIG = load_user_config()
+CONFIG = load_user_config(project_dir=PROJECT_DIR)
 DOCKERD = True
 
 LOG_DIR = os.path.join(PROJECT_DIR, 'logs')
@@ -31,22 +29,11 @@ LOG_LEVEL = CONFIG.LOG_LEVEL
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = []
-INSTALLED_APPS += ["ops.apps.LocalAppConfig"]
-INSTALLED_APPS += ["xrule.apps.LocalAppConfig"]
-
-# INSTALLED_APPS += ["ptool.apps.LocalAppConfig"]
-INSTALLED_APPS += ["siem.apps.LocalAppConfig"]
 
 # 2020-5-21 准备增加flume-grok相关的工具
 
 
 DEFAULT_DJANGO_APPS = [
-    # 'xadmin',
-    # 'crispy_forms',
-    # 'reversion',
-    'simpleui',
-    'import_export',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,20 +42,15 @@ DEFAULT_DJANGO_APPS = [
     'django.contrib.staticfiles',
 
     'django.contrib.sites',
-    'corsheaders',
 ]
 
 
-# Add apscheduler and Django celery result
-INSTALLED_APPS += ['django_apscheduler.apps.DjangoApschedulerConfig']
-
 # Add Celery Beat
-# INSTALLED_APPS += ['django_celery_beat.apps.BeatConfig']
+INSTALLED_APPS += ['django_celery_beat.apps.BeatConfig']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -76,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'website.urls'
+ROOT_URLCONF = 'web.urls'
 
 TEMPLATES = [
     {
@@ -95,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'website.wsgi.application'
+WSGI_APPLICATION = 'web.wsgi.application'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -220,9 +202,6 @@ if not os.path.exists(MEDIA_DIR):
 MEDIA_URL = '/static/media/'
 MEDIA_ROOT = MEDIA_DIR
 
-# PROJECT_DIR = STATIC_ROOT
-# import pymysql
-
 # Cache use redis
 CACHES = {
     'default': {
@@ -255,60 +234,21 @@ try:
 except:
     pass
 
-# Load Cor Headers 
-X_FRAME_OPTIONS = 'ALLOWALL'
-
-# 跨域增加忽略
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('*')
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-    'VIEW',
-)
-
-CORS_ALLOW_HEADERS = (
-    'XMLHttpRequest',
-    'X_FILENAME',
-    'accept-encoding',
-    'authorization',
-    'Authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'Pragma',
-    'X-Token',
-)
-
 SESSION_COOKIE_AGE = 60 * 30  # 30分钟
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 关闭浏览器，则COOKIE失效
 
 # 取消CSRF中间件
-MIDDLEWARE.append('ops.middle.MiddleWare.DisableCSRFCheck')
+MIDDLEWARE.append('lib.common.middle.MiddleWare.DisableCSRFCheck')
 
 # 测试环境下免登陆
 if DEBUG:
-    MIDDLEWARE.append('ops.middle.MiddleWare.SiteMainMiddleware')
+    MIDDLEWARE.append('lib.common.middle.MiddleWare.SiteMainMiddleware')
 
 PREVILEGED_USER_SETS = ["admin001", "admin007"]
 # TODO 2019-12-18 执行宿主机上的容器记录使用的是宿主机的挂载。
 HOST_STATIC_DIR = CONFIG.HOST_STATIC_DIR
 
-# Load 后台模板
-# from .grappelli import *
-
-# 2019-9-16 舍弃 xadmin 启用 simple-ui
-# simple-ui 虽然存在非常多的问题，但是也还可以用，详情修复见 docs
-from .simple_ui import *
 
 # TODO 2019-12-16 增加了 celery
 # Dump all celery log to here

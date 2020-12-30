@@ -8,7 +8,7 @@ from celery.schedules import crontab
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-sys.path.insert(PROJECT_DIR)
+sys.path.append(PROJECT_DIR)
 
 # Todo: Set ENV and autodiscover_tasks based in django-beat ;
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'web.settings')
@@ -45,4 +45,4 @@ cel.conf.update(configs)
 # cel.autodiscover_tasks(lambda: [app_config.split('.')[0] for app_config in settings.INSTALLED_APPS])
 
 # TODO 2020-12-29 新版本统一从tasks目录下寻找
-cel.autodiscover_tasks('tasks')
+cel.autodiscover_tasks(lambda: ['tasks.xscan', ])

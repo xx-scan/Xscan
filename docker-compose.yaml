@@ -1,0 +1,65 @@
+version: "2"
+
+services:
+   web:
+      container_name: gunicorn
+      restart: always
+      image: 'registry.cn-chengdu.aliyuncs.com/meigea/xsl-pydev'
+      expose:
+        - 8077
+      volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - ./:/usr/src/app
+        - ./collect_static:/usr/src/collect_static
+        - ./config.yml:/usr/src/config.yml
+        - /working_dir:/working_dir
+        - /usr/bin/docker:/usr/bin/docker
+        - /var/run/docker.sock:/var/run/docker.sock
+      command: /usr/local/bin/gunicorn web.wsgi:application -w 2 -b :8077
+      networks:
+          customize_net:
+            ipv4_address: 192.168.77.110
+
+   mysql:
+      container_name: mysql
+      image: 'registry.cn-hangzhou.aliyuncs.com/xxzhang/mysql:5.7'
+      volumes:
+        - /srv/docker.mysql_data2:/var/lib/mysql
+        - ./private/containers/mysql/mysql.conf.d:/etc/mysql/mysql.conf.d
+      restart: always
+      ports:
+        - "3306:3306"
+      environment:
+       - MYSQL_USER=admin007
+       - MYSQL_PASSWORD=myadmin@816
+       - MYSQL_DATABASE=qydldb
+       - MYSQL_ROOT_PASSWORD=test@1q2w2e4R
+      networks:
+        customize_net:
+          ipv4_address: 192.168.77.101
+
+   redis:
+     container_name: redis
+     image: 'registry.cn-hangzhou.aliyuncs.com/xxzhang/redis:4.0.9'
+     volumes:
+       - /srv/docker/redis_data2:/var/lib/redis
+       - /etc/localtime:/etc/localtime:ro
+     restart: always
+     #expose:
+     #  - 6379
+     ports:
+       - 6379:6379
+     environment:
+       - REDIS_PASSWORD=sqsjywl123
+     networks:
+       customize_net:
+         ipv4_address: 192.168.77.79
+
+networks:
+  customize_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.77.0/24
+

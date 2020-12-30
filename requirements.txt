@@ -38,6 +38,9 @@ django-celery-beat==2.0
 # wsgi
 gunicorn==19.9.0
 
+## django-admin
+django-simpleui==2.9
+django-import-export==1.2.0
 
 
 

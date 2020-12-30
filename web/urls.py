@@ -7,7 +7,7 @@ admin.site.site_title = settings.SITE_NAME
 admin.site.site_header = settings.SITE_NAME
 
 urlpatterns = [
-      url(r'^sta/admin-v0/', admin.site.urls),
+      url(r'^tscan/admin-v0/', admin.site.urls),
       # url(r'^cso/admin-v1/', xadmin.site.urls),
 
   ]
